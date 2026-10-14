@@ -1,4 +1,4 @@
-# AV bus Blender kit — NTU Team 8
+# AV bus Blender kit — NTU Team 1
 
 Keep these **four files together in one folder** when sharing them:
 

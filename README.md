@@ -6,7 +6,7 @@ A reusable, scripted Blender concept bus for animation. It includes a furnished 
 
 ![Stop and ramp motion demo](demo.gif)
 
-This visual asset was created for NTU Team 8's video demonstration for the **Singapore BusTech Grand Challenge (SGBTGC) 2026**. It is an independent student concept, not an official LTA, operator, or manufacturer model. Singapore is piloting autonomous public-bus services; this bus should not be mistaken for the vehicle selected for those services.
+This visual asset was created for NTU Team 1's video demonstration for the **Singapore BusTech Grand Challenge (SGBTGC) 2026**. It is an independent student concept, not an official LTA, operator, or manufacturer model. Singapore is piloting autonomous public-bus services; this bus should not be mistaken for the vehicle selected for those services.
 
 ## What is included
 

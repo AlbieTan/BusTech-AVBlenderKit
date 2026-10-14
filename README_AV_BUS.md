@@ -69,7 +69,7 @@ bus["set_doors"](root, 1.0, frame=24)
 bus["set_ramp"](root, 0.70, frame=40)  # fully slid out, not tilted
 bus["set_ramp"](root, 1.0, frame=52)   # tilted to the curb
 bus["set_canopy"](root, 1.0, frame=40)
-bus["set_side_display"](root, route_number="400", passenger_seats=9)
+bus["set_side_display"](root, route_number="400", passenger_seats=16)
 bus["set_cutaway"](root, True)
 bus["set_exploded"](root, 1.0, frame=80)
 ```
@@ -82,9 +82,11 @@ master. The clean master can also be appended into another scene via
 
 The asset is an original visual approximation based on the provided AV-bus
 photos, not manufacturer CAD. It is approximately 6.65 m × 2.34 m and has a
-passenger cabin, nine passenger seats, one safety-operator seat, grab rails,
+passenger cabin, 16 passenger seats (nine on the lower floor and seven on the
+raised rear platform), one separate safety-operator seat, grab rails, an
+entrance-side wheelchair bay with a blue floor pictogram,
 fare validator, roof sensors, sliding doors, side route display, canopy and
-ramp. The side sign reads `400` and `09 SEATS` by default: this is the **modelled
+ramp. The side sign reads `400` and `16 SEATS` by default: this is the **modelled
 installed-seat count**, not live vacant-seat availability. Edit `CFG` at the top
 of `build_av_bus.py` before building, or use `set_side_display` per scene.
 
@@ -101,6 +103,6 @@ playable `.blend` scenes. Frame checks confirmed that the bus holds position
 during boarding, the ramp has **zero horizontal rotation**, and the canopy
 deploys only in the canopy variant before retracting for departure.
 
-The current motion demo is `AV_Bus_Straight_Slide_Ramp_Demo.gif`. Your own
+The current motion demo is `demo.gif`. Your own
 currently open Blender scene is not modified by the generated master or GIF;
 open or append the new master to use this revision.

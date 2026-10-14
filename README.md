@@ -1,6 +1,6 @@
 # AV Bus Blender Kit
 
-A reusable, scripted Blender concept bus for animation. It includes a furnished cabin, a side route/seat display, and stop sequences with opening doors, a deployable ramp, and an optional rain canopy.
+A reusable, scripted Blender concept bus for animation. It includes 16 passenger seats, a separate safety-operator seat, an entrance-side wheelchair-bay marking, a side route/seat display, and stop sequences with opening doors, a deployable ramp, and an optional rain canopy.
 
 ![Bus concept preview](preview.png)
 

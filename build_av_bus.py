@@ -12,7 +12,7 @@ After running, use the functions at the end of this file in Blender's Python con
     set_doors(root, 1.0, frame=48)       # 0 closed, 1 open
     set_canopy(root, 1.0, frame=48)      # 0 retracted, 1 rain shelter extended
     set_ramp(root, 1.0, frame=48)        # 0 under floor, 1 unfolded
-    set_side_display(root, "400", 9)    # route and passenger-seat count
+    set_side_display(root, "400", 16)   # route and passenger-seat count
     animate_boarding_stop(root, 72, 120)  # hardware sequence for a dwell
     set_exploded(root, 1.0, frame=96)    # 0 assembled, 1 exploded
     set_cutaway(root, True)              # hide the near-side glass/roof skin
@@ -41,7 +41,7 @@ CFG = {
     "door_side": 1,  # +Y: entrance/curb side in this asset convention
     "destination": "400  SHENTON WAY",
     "route_number": "400",
-    "passenger_seats": 9,  # modelled passenger seats; excludes safety-operator seat
+    "passenger_seats": 16,  # modelled passenger seats; excludes safety-operator seat
     "canopy_length": 5.55,
     "canopy_extension": 0.86,
     "ramp_length": 2.35,
@@ -97,6 +97,10 @@ def init_materials():
         "seat_blue": material("Teal seats", (0.02, 0.23, 0.30), 0.0, 0.68),
         "seat_red": material("Priority red seats", (0.53, 0.065, 0.09), 0.0, 0.65),
         "yellow": material("Safety yellow", (0.95, 0.64, 0.015), 0.02, 0.43),
+        "access_blue": material("Accessibility blue", (0.025, 0.28, 0.61),
+                                0.0, 0.55),
+        "access_white": material("Accessibility white", (0.94, 0.97, 0.98),
+                                 0.0, 0.60),
         "white": material("White lamps", (0.86, 0.95, 1.0), 0.04, 0.16,
                           emission=(0.8, 0.95, 1.0), emission_strength=1.4),
         "red": material("Brake red", (0.66, 0.012, 0.015), 0.0, 0.19,
@@ -480,9 +484,9 @@ def build_ramp(group, c):
     return pivot
 
 
-def build_seat(group, name, x, y, facing=1, priority=False):
+def build_seat(group, name, x, y, facing=1, priority=False, floor_lift=0.0):
     seat_mat = M['seat_red'] if priority else M['seat_blue']
-    anchor = empty(f"SEAT_{name}", group, location=(x, y, 0))
+    anchor = empty(f"SEAT_{name}", group, location=(x, y, floor_lift))
     # Local +X is the direction the seated passenger faces.
     if facing == -1:
         anchor.rotation_euler[2] = math.pi
@@ -505,24 +509,46 @@ def build_interior(group, c):
          (6.10, 0.035, 0.70), M['interior'], group)
     cube("Front cabin partition", (2.70, 0, 1.54),
          (0.055, 1.96, 1.56), M['interior'], group, bevel=0.016)
-    cube("Rear cabin partition", (-2.93, 0, 1.39),
+    cube("Rear cabin partition", (-3.10, 0, 1.39),
          (0.045, 2.00, 1.20), M['interior'], group, bevel=0.018)
-    cube("Rear raised plinth", (-2.57, 0, 0.88),
-         (1.15, 2.03, 0.25), M['floor'], group, bevel=0.035)
-    # Door-side priority / wheelchair clear zone around x = 0.3..1.5.
-    for i, x in enumerate((-2.26, -1.48, -0.70)):
-        build_seat(group, f"road_{i}", x, -0.65)
-    for i, x in enumerate((-2.26, -1.48, -0.70)):
-        build_seat(group, f"curb_{i}", x, 0.65, priority=(i == 2))
-    build_seat(group, "front_road", 0.12, -0.65, priority=True)
-    build_seat(group, "rear_corner_road", -2.66, -0.63, facing=-1)
-    build_seat(group, "rear_corner_curb", -2.66, 0.63, facing=-1)
+    cube("Rear raised plinth", (-2.50, 0, 0.88),
+         (1.29, 2.03, 0.25), M['floor'], group, bevel=0.035)
+    # Looking from the front toward the rear, left is -Y and right is +Y.
+    # Lower floor: three rows, two left + one right = nine passenger seats.
+    # The +Y door / wheelchair clear zone remains forward of these rows.
+    lower_rows = (-0.02, -0.72, -1.42)
+    for row, x in enumerate(lower_rows, start=1):
+        build_seat(group, f"lower_L{row}_outer", x, -0.81)
+        build_seat(group, f"lower_L{row}_inner", x, -0.31)
+        build_seat(group, f"lower_R{row}", x, 0.77,
+                   priority=(row == 1))
+
+    # Raised rear platform: front row has 2 left + 1 right; back row has
+    # 2 left + 2 right, like a full-width rear bench. The seat anchors are
+    # lifted by the same 0.23 m step as the platform, not buried in its floor.
+    raised_rows = (-2.16, -2.72)
+    raised_lift = 0.23
+    for row, x in enumerate(raised_rows, start=1):
+        build_seat(group, f"raised_L{row}_outer", x, -0.81,
+                   floor_lift=raised_lift)
+        build_seat(group, f"raised_L{row}_inner", x, -0.31,
+                   floor_lift=raised_lift)
+    build_seat(group, "raised_R1", raised_rows[0], 0.77,
+               floor_lift=raised_lift)
+    build_seat(group, "raised_R2_inner", raised_rows[1], 0.31,
+               floor_lift=raised_lift)
+    build_seat(group, "raised_R2_outer", raised_rows[1], 0.81,
+               floor_lift=raised_lift)
 
     # Ceiling, rails, grab poles, hanging grips and interior lighting.
     for side in (-1, 1):
         rod(f"Ceiling grab rail {side}", (-2.71, side*0.64, 2.58),
             (2.49, side*0.64, 2.58), 0.022, M['steel'], group)
         for i, x in enumerate((-2.18, -1.18, -0.19, 1.68)):
+            # The front road-side pole would pass through the safety-operator
+            # seat; leave that station unobstructed.
+            if side == -1 and i == 3:
+                continue
             rod(f"Vertical grab pole {side} {i}", (x, side*0.58, 0.77),
                 (x, side*0.58, 2.60), 0.022, M['steel'], group)
         for i, x in enumerate((-1.79, -0.84, 0.10, 1.58)):
@@ -546,8 +572,29 @@ def build_interior(group, c):
          (0.18, 0.014, 0.20), M['lens'], group, bevel=0.011)
     rod("Fare validator post", (1.60, 0.50, 0.76),
         (1.60, 0.50, 1.20), 0.026, M['steel'], group)
-    cube("Wheelchair bay floor symbol", (0.59, 0.53, 0.787),
-         (0.47, 0.44, 0.005), M['yellow'], group, bevel=0.015)
+    # Floor-mounted accessibility marking in the clear entrance-side bay,
+    # behind and across the aisle from the safety-operator station.
+    bay_x, bay_y, mark_z = 0.59, 0.53, 0.797
+    cube("Wheelchair bay blue plate", (bay_x, bay_y, 0.787),
+         (0.53, 0.46, 0.006), M['access_blue'], group, bevel=0.018)
+    torus("Wheelchair symbol main wheel", (bay_x-0.055, bay_y-0.055, mark_z),
+          0.093, 0.012, M['access_white'], group, rotation=(0, 0, 0))
+    cylinder("Wheelchair symbol head", (bay_x-0.085, bay_y+0.138, mark_z),
+             0.027, 0.003, M['access_white'], group, vertices=24)
+    rod("Wheelchair symbol back", (bay_x-0.086, bay_y+0.098, mark_z),
+        (bay_x-0.086, bay_y+0.022, mark_z), 0.011,
+        M['access_white'], group)
+    rod("Wheelchair symbol seat", (bay_x-0.086, bay_y+0.028, mark_z),
+        (bay_x+0.094, bay_y+0.028, mark_z), 0.011,
+        M['access_white'], group)
+    rod("Wheelchair symbol leg", (bay_x+0.080, bay_y+0.027, mark_z),
+        (bay_x+0.143, bay_y-0.082, mark_z), 0.011,
+        M['access_white'], group)
+    rod("Wheelchair symbol footrest", (bay_x+0.143, bay_y-0.082, mark_z),
+        (bay_x+0.190, bay_y-0.082, mark_z), 0.011,
+        M['access_white'], group)
+    cylinder("Wheelchair symbol front caster", (bay_x+0.173, bay_y-0.114, mark_z),
+             0.020, 0.003, M['access_white'], group, vertices=16)
 
 
 def build_sensors(group, c):

@@ -1,39 +1,70 @@
-# AV Bus Blender Kit
+# SightLine — AV Bus Blender Kit
 
-A reusable, scripted Blender concept bus for animation. It includes 16 passenger seats, a separate safety-operator seat, an entrance-side wheelchair-bay marking, a side route/seat display, and stop sequences with opening doors, a deployable ramp, and an optional rain canopy.
+**NTU Team 1 · Singapore BusTech Grand Challenge 2026 · Blender 5.2**
 
-![Bus concept preview](preview.png)
+A reusable, stylized autonomous-bus concept and scene kit made for our team's three-minute accessibility story. This repository now follows the work from the **bus model**, through the **rider, before/after stops and Singapore-inspired street set**, to the first two animated shots.
 
-![Stop and ramp motion demo](demo.gif)
+![Full-resolution frame from Shot 1: bus arriving at the ordinary stop](shots/previews/s01_fullres_f121.png)
 
-This visual asset was created for NTU Team 1's video demonstration for the **Singapore BusTech Grand Challenge (SGBTGC) 2026**. It is an independent student concept, not an official LTA, operator, or manufacturer model. Singapore is piloting autonomous public-bus services; this bus should not be mistaken for the vehicle selected for those services.
+**Watch the current sequence:** [Shots 1–2 · 1080p MP4](shots/renders/1-2.mp4) · [Open the editable 1–2 Blender timeline](shots/renders/1-2.blend) · [Browse all scene files](shots/)
 
-## What is included
+The 12-second sequence is **1920 × 1080, 24 fps, 288 frames**. It is a silent work-in-progress render; sound, captions and editorial overlays will be added in the film edit. The MP4 is a video export, while `1-2.blend` contains both original animated scenes on a single Blender timeline and needs no external movie file.
 
-| File | Purpose |
+## From assets to story
+
+| Stage | What is here now |
 | --- | --- |
-| `build_av_bus.py` | Creates the bus and named animation controls. |
-| `animate_stop_ramp.py` | Animates approach, stop, doors, ramp, stowage, and departure. |
-| `animate_stop_ramp_canopy.py` | Adds canopy deployment to the stop sequence. |
-| `README_AV_BUS.md` | Detailed setup, controls, and shot-making guide. |
-| `AV_Bus_Master.blend` | Clean, unanimated sample scene. |
-| `demo.gif` | Short motion preview. |
-| `preview.png` | Still preview of the bus. |
-| `set-bundle/` | Reusable bus, rider, before/after stops, Singapore streetscape, builders and asset preview. No shot scenes. |
-| `shots/` | Shot 1 and Shot 2 Blender scenes, plus review previews. Kept separate from the reusable assets. |
+| **01 · Bus** | A 16-passenger-seat concept with an empty safety-operator seat, a marked wheelchair bay, side route/seat display, opening doors, deployable ramp and optional rain canopy. |
+| **02 · Rider and stops** | A generic stylized wheelchair user, an ordinary **before** shelter and a separate SightLine **after** shelter with arrival display, help panel and priority boarding zone. |
+| **03 · Singapore-inspired set** | Road, 15 cm kerb, tactile paving, bus-bay markings, housing façades, tropical trees and street furniture. |
+| **04 · Shots 1–2** | The bus arrives; then the doors open to reveal a gap and raised entry that prevent boarding. The ramp stays stowed in this **before** sequence. |
 
-Keep the three Python files in the same folder. To build from scratch, open Blender's Scripting workspace in a fresh scene and run `build_av_bus.py`. To use the supplied scene, open `AV_Bus_Master.blend`; run **one** of the two animation scripts in a fresh copy. The two variants should not be run over one another. See [the full usage guide](README_AV_BUS.md) for command-line examples, scene controls, and timing.
+### The bus and rider
 
-Tested with Blender 5.2.2 LTS. The geometry, seating, sensor details, and ramp/canopy mechanisms are illustrative. The ramp is **not** an accessibility-certified design, and this kit is not suitable for fabrication, vehicle engineering, or operational safety decisions.
+| AV bus concept | Generic rider, “Albie” |
+| :---: | :---: |
+| ![Lime-green AV bus concept with side route display](preview.png) | ![Stylized rider seated in a powered wheelchair](set-bundle/previews/preview_albie.png) |
+| [Bus `.blend`](AV_Bus_Master.blend) · [model guide](README_AV_BUS.md) · [doors/ramp/canopy GIF](demo.gif) | [Rider `.blend`](set-bundle/assets/Albie_Powered_Wheelchair.blend) |
 
-The current shot scenes are [Shot 1 — bus arrival](shots/s01_bus_arrival_v05.blend) and [Shot 2 — kerb gap](shots/s02_bus_gap_v05.blend). Both are saved at 1920 × 1080, 24 fps and 100% resolution. The GIFs in [`shots/previews/`](shots/previews/) are lightweight motion reviews, not final-quality renders; the Shot 1 PNG there is a full-resolution still. See the [set-bundle guide](set-bundle/README.md) and [shots guide](shots/README.md) for details.
+### Two distinct bus stops
 
-## Project background
+| Before — ordinary shelter | After — SightLine-equipped shelter |
+| :---: | :---: |
+| ![Ordinary bus stop before the proposed upgrade](set-bundle/previews/preview_stop_before.png) | ![Upgraded stop with arrival display, help panel and priority boarding zone](set-bundle/previews/preview_stop_upgrade.png) |
+| [Before `.blend`](set-bundle/assets/SightLine_Stop_Before.blend) | [After `.blend`](set-bundle/assets/SightLine_Stop_After.blend) |
 
-Singapore's Land Transport Authority has announced pilot deployment of autonomous buses on public services 400 and 191. This kit visualises a student team's own bus concept for storytelling; it does not reproduce official CAD or make claims about the configuration of a deployed vehicle. [LTA pilot announcement](https://www.lta.gov.sg/content/ltagov/en/newsroom/2025/10/news-releases/lta_awards_contract_pilot_deployment_autonomous_buses.html).
+The upgraded stop's QR code is a **demo linking to `https://example.com`**, not a live service. Replace it before publishing a final demonstration. The side-mounted camera and kerb sensor are visual concept components, not validated safety hardware.
 
-## Sharing status
+### Reusable street set
 
-This repository is being prepared privately for a possible post-competition release. **No reuse license has been selected yet.** Until one is added, please do not assume permission to redistribute or adapt the files outside the team. Before making the repository public, the team should agree on authorship/permission, check the competition rules, and select a license if open reuse is intended.
+![Singapore-inspired street set with housing, bus bay, kerb and tropical trees](set-bundle/previews/preview_singapore_street_set.png)
 
-No third-party reference photos, videos, or official logos are included.
+[Open the street-set `.blend`](set-bundle/assets/Singapore_Street_Set_Master.blend) · [Read the asset-bundle guide](set-bundle/README.md)
+
+## Watch the first two shots
+
+| Shot 1 · Arrival | Shot 2 · The gap |
+| :---: | :---: |
+| ![Reduced-resolution motion preview of bus arriving](shots/previews/s01_review_v05.gif) | ![Reduced-resolution motion preview of the gap and departure](shots/previews/s02_review_v05.gif) |
+| [1080p MP4](shots/renders/s01_bus_arrival_1080p24.mp4) · [editable scene](shots/s01_bus_arrival_v05.blend) | [1080p MP4](shots/renders/s02_bus_gap_1080p24.mp4) · [editable scene](shots/s02_bus_gap_v05.blend) |
+
+The GIFs are **small, sparsely sampled motion reviews**; use the MP4s for playback and the `.blend` files for editing. See the [shots guide](shots/README.md) for frame ranges and render notes.
+
+## Find the right file
+
+| Location | Purpose |
+| --- | --- |
+| [`build_av_bus.py`](build_av_bus.py) | Rebuild the bus model and named animation controls. |
+| [`animate_stop_ramp.py`](animate_stop_ramp.py), [`animate_stop_ramp_canopy.py`](animate_stop_ramp_canopy.py) | Two alternative stop-motion demonstrations. Run either one on a fresh bus scene. |
+| [`AV_Bus_Master.blend`](AV_Bus_Master.blend) | Clean bus model for appending into new scenes. |
+| [`set-bundle/assets/`](set-bundle/assets/) | Five reusable `.blend` assets: bus, rider, before stop, after stop and street set. |
+| [`set-bundle/scripts/`](set-bundle/scripts/) | Procedural builders and helpers used to create the reusable assets. |
+| [`shots/`](shots/) | The two current shot scenes, review GIFs, 1080p exports and combined timeline. |
+
+To make a new scene, open Blender 5.2 and **File → Append** the relevant asset collection, then move its root object (`AV_BUS_ROOT`, `ALBIE_ROOT`, `STOP_ASSET_ROOT` or `SG_SET_ROOT`). To review the current edit, open [`shots/renders/1-2.blend`](shots/renders/1-2.blend) and use the **Video Sequencer** timeline: Shot 1 occupies frames **1–144**, Shot 2 frames **145–288**. The two shot scenes have appended assets, so they do not depend on links to the set-bundle folder. For bus controls and command-line examples, use the [full bus guide](README_AV_BUS.md).
+
+## Project status and use
+
+This is an **independent student visual concept** for NTU Team 1's Singapore BusTech Grand Challenge 2026 video, not an official LTA, bus-operator or manufacturer model. Geometry, seating, sensing, ramp and canopy mechanisms are illustrative; the ramp is **not accessibility-certified**, and nothing here should be used for fabrication or operational safety decisions. Route numbers and housing signs are demo scenery.
+
+The repository is being prepared privately for a possible post-competition release. **No reuse license has been selected yet**; do not assume permission to redistribute or adapt these files outside the team. No third-party reference photographs, videos or official logos are included.

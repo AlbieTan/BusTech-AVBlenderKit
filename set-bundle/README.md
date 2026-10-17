@@ -2,6 +2,12 @@
 
 This is a reusable, stylized Singapore-inspired asset kit for the team's AV-bus film. It contains the current 16-seat AV bus, generic seated Albie in a powered wheelchair, two **separate** bus stops, and a modular street environment. It contains **no individual shot scenes**. All `.blend` files were saved in Blender 5.2 with metric metres and 24 fps. This bundle is separate from the RailTech repository.
 
+| Rider | Ordinary stop | Upgraded stop |
+| :---: | :---: | :---: |
+| ![Generic rider in powered wheelchair](previews/preview_albie.png) | ![Before bus stop](previews/preview_stop_before.png) | ![SightLine-equipped after bus stop](previews/preview_stop_upgrade.png) |
+
+![Singapore-inspired road and bus-stop environment](previews/preview_singapore_street_set.png)
+
 ## Files
 
 | Location | Use |
@@ -11,7 +17,7 @@ This is a reusable, stylized Singapore-inspired asset kit for the team's AV-bus 
 | `assets/SightLine_Stop_Before.blend` | Ordinary shelter for the opening problem scene. |
 | `assets/SightLine_Stop_After.blend` | Upgraded shelter, display, help panel, side-facing boarding camera and kerb sensor, priority bay. |
 | `assets/Singapore_Street_Set_Master.blend` | Road, 15 cm kerb, tactile paving, bus-bay markings, housing façades, tropical greenery and street furniture. |
-| `previews/preview_singapore_street_set.png` | Preview of the reusable environment only. |
+| `previews/` | PNG previews of the rider, both distinct stops and the reusable street set. The bus preview is at [`../preview.png`](../preview.png). |
 | `scripts/` | Procedural asset builders and bus animation helpers for reproducible edits. |
 
 ## Using the assets in a new scene

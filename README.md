@@ -19,10 +19,14 @@ This visual asset was created for NTU Team 1's video demonstration for the **Sin
 | `AV_Bus_Master.blend` | Clean, unanimated sample scene. |
 | `demo.gif` | Short motion preview. |
 | `preview.png` | Still preview of the bus. |
+| `set-bundle/` | Reusable bus, rider, before/after stops, Singapore streetscape, builders and asset preview. No shot scenes. |
+| `shots/` | Shot 1 and Shot 2 Blender scenes, plus review previews. Kept separate from the reusable assets. |
 
 Keep the three Python files in the same folder. To build from scratch, open Blender's Scripting workspace in a fresh scene and run `build_av_bus.py`. To use the supplied scene, open `AV_Bus_Master.blend`; run **one** of the two animation scripts in a fresh copy. The two variants should not be run over one another. See [the full usage guide](README_AV_BUS.md) for command-line examples, scene controls, and timing.
 
 Tested with Blender 5.2.2 LTS. The geometry, seating, sensor details, and ramp/canopy mechanisms are illustrative. The ramp is **not** an accessibility-certified design, and this kit is not suitable for fabrication, vehicle engineering, or operational safety decisions.
+
+The current shot scenes are [Shot 1 — bus arrival](shots/s01_bus_arrival_v05.blend) and [Shot 2 — kerb gap](shots/s02_bus_gap_v05.blend). Both are saved at 1920 × 1080, 24 fps and 100% resolution. The GIFs in [`shots/previews/`](shots/previews/) are lightweight motion reviews, not final-quality renders; the Shot 1 PNG there is a full-resolution still. See the [set-bundle guide](set-bundle/README.md) and [shots guide](shots/README.md) for details.
 
 ## Project background
 

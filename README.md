@@ -63,8 +63,6 @@ The GIFs are **small, sparsely sampled motion reviews**; use the MP4s for playba
 
 To make a new scene, open Blender 5.2 and **File → Append** the relevant asset collection, then move its root object (`AV_BUS_ROOT`, `ALBIE_ROOT`, `STOP_ASSET_ROOT` or `SG_SET_ROOT`). To review the current edit, open [`shots/renders/1-2.blend`](shots/renders/1-2.blend) and use the **Video Sequencer** timeline: Shot 1 occupies frames **1–144**, Shot 2 frames **145–288**. The two shot scenes have appended assets, so they do not depend on links to the set-bundle folder. For bus controls and command-line examples, use the [full bus guide](README_AV_BUS.md).
 
-## Project status and use
+## Project status
 
 This is an **independent student visual concept** for NTU Team 1's Singapore BusTech Grand Challenge 2026 video, not an official LTA, bus-operator or manufacturer model. Geometry, seating, sensing, ramp and canopy mechanisms are illustrative; the ramp is **not accessibility-certified**, and nothing here should be used for fabrication or operational safety decisions. Route numbers and housing signs are demo scenery.
-
-The repository is being prepared privately for a possible post-competition release. **No reuse license has been selected yet**; do not assume permission to redistribute or adapt these files outside the team. No third-party reference photographs, videos or official logos are included.

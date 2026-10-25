@@ -1,4 +1,4 @@
-# SightLine — AV (Bus) Blender Kit
+# SightLine — Autonomous Vehicle (Bus) Blender Kit
 
 **NTU Team 1 · Singapore BusTech Grand Challenge 2026 · Blender 5.2**
 
